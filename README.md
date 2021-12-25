@@ -1,8 +1,13 @@
 # _vroughtime_: a compact roughtime client
 
-_vroughtime_ is a compact C library for `roughtime`, a secure Network Time Protocol (NTP) replacement,
-targeting at embedded use. `roughtime` provides cryptographically authenticated time.
-This is useful if your cryptographic protocol relies on time (eg certificate expiration times).
+_vroughtime_ is a compact C library for a `roughtime`, a secure clock synchronization protocol. This protocol provides cryptographically authenticated time. This implementation targets embedded use.
+
+This is a picture of an ESP32-based clock running vroughtime:
+<p align="left">
+  <img src="clock-esp32.jpg" width="400" title="A clock">
+</p>
+
+
 
 A `roughtime` client is relatively simple and lightweight to implement,
 even in lower-end processors, since it does not use TLS.
@@ -14,6 +19,7 @@ For a nicer explanation on `roughtime`,
 [look here](https://roughtime.googlesource.com/roughtime/#roughtime-1).
 For the protocol specification,
 [click here](https://roughtime.googlesource.com/roughtime/+/HEAD/PROTOCOL.md).
+`roughtime` is useful if your cryptographic protocol relies on time (eg certificate expiration times).
 
 `vroughtime` is a portable implementation with no dependency on the transport layer.
 You need to provide this.
