@@ -1,4 +1,6 @@
-// vrt: compact rough time client implementation
+// vroughtime: compact rough time client implementation
+//
+// https://github.com/oreparaz/vroughtime
 //
 // (c) 2021 Oscar Reparaz <firstname.lastname@esat.kuleuven.be>
 
