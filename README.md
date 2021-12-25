@@ -1,6 +1,6 @@
-# _vrt_: a compact roughtime client
+# _vroughtime_: a compact roughtime client
 
-_vrt_ is a compact C library for `roughtime`, a secure Network Time Protocol (NTP) replacement,
+_vroughtime_ is a compact C library for `roughtime`, a secure Network Time Protocol (NTP) replacement,
 targeting at embedded use. `roughtime` provides cryptographically authenticated time.
 This is useful if your cryptographic protocol relies on time (eg certificate expiration times).
 
@@ -15,12 +15,12 @@ For a nicer explanation on `roughtime`,
 For the protocol specification,
 [click here](https://roughtime.googlesource.com/roughtime/+/HEAD/PROTOCOL.md).
 
-`vrt` is a portable implementation with no dependency on the transport layer.
+`vroughtime` is a portable implementation with no dependency on the transport layer.
 You need to provide this.
 
 ## Usage
 
-To make things easy, _vrt_ does not even ship with
+To make things easy, _vroughtime_ does not even ship with
 a build system. You just need the following files:
 
 * vrt.c
@@ -72,7 +72,7 @@ deals with tag-length-values and calls crypto. This looks like mixing water
 with electricity. The answer is, esteemed reader, a little more nuanced to
 fit in a sentence.
 
-**Warning**: _vrt_ is the product of a single human with zero peer review.
+**Warning**: _vroughtime_ is the product of a single human with zero peer review.
 Meaning that it will have bugs. So if you have some time to dispose of,
 audit the code (the relevant bits are only about 200 lines) and leave
 a PR with your findings (even if none!). And please add your name here ❤️
