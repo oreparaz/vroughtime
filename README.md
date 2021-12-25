@@ -62,12 +62,17 @@ fail_on(ret != VRT_SUCCESS);
 
 The output will be placed in `out_midpoint`. Check `vrt_test.c` and `vrt_client_unix.c` for an example on how to use it.
 
-__If you already have libsodium in your project__, then do not compile
-`tweetnacl.c`, but include `sodium.h` instead of `tweetnacl.h`. Things
-should work out of the box. The only call to libsodium is `crypto_sign_open`.
+Some more details:
 
-For a list of current roughtime servers, see
-https://github.com/cloudflare/roughtime/blob/master/ecosystem.json
+ * __If you already have libsodium in your project__, then do not compile
+   `tweetnacl.c`, but include `sodium.h` instead of `tweetnacl.h`. Things
+   should work out of the box. The only call to libsodium is `crypto_sign_open`.
+ * __If you are tight on RAM__, you can reuse the buffer for sending and receiving.
+   See `vrt_client_freertos.c` for an example.
+ * roughtime requires updatable clients. If you link against `vroughtime`,
+   you should have an update path.
+ * For a list of current roughtime servers, see
+   https://github.com/cloudflare/roughtime/blob/master/ecosystem.json
 
 ## Notes
 
