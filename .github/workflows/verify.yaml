@@ -1,0 +1,18 @@
+name: Run cbmc_verify
+on: [push, pull_request]
+jobs:
+  cmbc_verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: |
+          curl -o cbmc.deb -L https://github.com/diffblue/cbmc/releases/download/cbmc-5.54.0/ubuntu-20.04-cbmc-5.54.0-Linux.deb
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+                                  ./cbmc.deb
+          rm -rf cbmc.deb
+      - name: Run proof
+        run: |
+          cd verify
+          cbmc vrt_cbmc_harness.c ../vrt.c --function vrt_cbmc_harness --unwind 1 --bounds-check --pointer-check

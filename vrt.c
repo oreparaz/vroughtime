@@ -43,6 +43,7 @@ VISIBILITY_ONLY_TESTING vrt_ret_t vrt_blob_r32(vrt_blob_t *b,
                                                uint32_t word_index,
                                                uint32_t *out) {
   CHECK_NOT_NULL(b);
+  CHECK_NOT_NULL(b->data);
   CHECK_NOT_NULL(out);
 
   // mind integer overflow if this condition was written as 4*word_index >=
