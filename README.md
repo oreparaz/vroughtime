@@ -4,7 +4,7 @@ _vroughtime_ is a compact C library for a `roughtime`, a secure clock synchroniz
 
 This is a picture of an ESP32-based clock running vroughtime:
 <p align="left">
-  <img src="clock-esp32.jpg" width="400" title="A clock">
+  <img src="docs/clock-esp32.jpg" width="400" title="A clock">
 </p>
 
 
