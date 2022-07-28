@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "tweetnacl.h"
+#include "../../tweetnacl.h"
 
 int crypto_hash_sha512(unsigned char *a,const unsigned char *b,unsigned long long c)
 {
