@@ -1,0 +1,11 @@
+name: Run unit tests
+on: [push, pull_request]
+jobs:
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: |
+          cd tests/unit
+          ./compile.sh
