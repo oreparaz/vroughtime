@@ -52,18 +52,19 @@ int prepare_socket(void)
 
 void prepare_servaddr(struct sockaddr_in *servaddr)
 {
-  struct hostent *he;
-  he = gethostbyname(HOST);
-  assert(he != NULL);
+  struct addrinfo hints = {0};
+  struct addrinfo *result = NULL;
 
-  bzero((char *)servaddr, sizeof(*servaddr));
+  hints.ai_family = AF_INET;
+  hints.ai_socktype = SOCK_DGRAM;
 
-  char **ip_addr;
-  memcpy(&ip_addr, &(he->h_addr_list[0]), sizeof(void *));
-  memcpy(&servaddr->sin_addr.s_addr, ip_addr, sizeof(struct in_addr));
+  int err = getaddrinfo(HOST, NULL, &hints, &result);
+  assert(err == 0);
+  assert(result != NULL && result->ai_addrlen >= sizeof(*servaddr));
 
-  servaddr->sin_family = AF_INET;
+  memcpy(servaddr, result->ai_addr, sizeof(*servaddr));
   servaddr->sin_port = htons(PORT);
+  freeaddrinfo(result);
 }
 
 int main(int argc, char **argv) {
@@ -85,15 +86,16 @@ int main(int argc, char **argv) {
   /* receive packet */
   assert(n==sizeof query);
   do {
-    n = recv(sockfd, recv_buffer, (sizeof recv_buffer) * sizeof recv_buffer[0], 0 /* flags */);
+    n = recv(sockfd, recv_buffer, sizeof recv_buffer, 0 /* flags */);
   } while (n == -1 && errno == EINTR);
+  assert(n >= 0);
 
   /* parse response */
   uint64_t out_midpoint;
   uint32_t out_radii;
 
   CHECK(vrt_parse_response(nonce, 64, recv_buffer,
-                            sizeof recv_buffer * sizeof recv_buffer[0],
+                            n,
                             //public_key_google, &out_midpoint,
                             public_key_cloudflare, &out_midpoint,
                             &out_radii));
